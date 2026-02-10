@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: dev-pod-k8s
+  labels:
+    app: ai-dev
+spec:
+  containers:
+  - name: dev
+    image: python:3.11
+    command: ["sleep", "infinity"]
+    workingDir: /workspace
+    volumeMounts:
+    - name: workspace
+      mountPath: /workspace
+  volumes:
+  - name: workspace
+    emptyDir: {}
+
