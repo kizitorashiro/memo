@@ -14,7 +14,7 @@ KubernetesとDevContainerの拡張を使う方が、
 ## VSCode Remote - SSH 拡張機能で接続する
 
 Pod上でSSHサーバーを起動し、VSCodeから接続します。
-VSCodeとPod間の通信経路はkubectl portforwardを使って作成します。
+VSCodeとPod間の通信経路はkubectl port-forwardを使って作成します。
 
 下記にサンプルのPodのマニフェストを示します。
 
@@ -65,7 +65,7 @@ NAME                                READY   STATUS    RESTARTS       AGE
 dev-pod-ssh                         1/1     Running   0              3s
 ```
 
-kubectl portfowardでPodのsshポートへのポートフォワードを有効にします。
+kubectl port-forwardでPodのsshポートへのポートフォワードを有効にします。
 
 ```bash
 % kubectl port-forward pod/dev-pod-ssh 2222:22
@@ -104,19 +104,19 @@ permitted by applicable law.
 
 事前にVSCodeにRemote - SSH拡張機能をインストールしておきます。
 
-Command Palletを開いて、`Remote-SSH: Connect to host...`を選択します。
+Command Paletteを開いて、`Remote-SSH: Connect to host...`を選択します。
 
 接続先の選択肢が表示されるので、`~/.ssh/config`に設定した
 `dev-pod-ssh`を選択します。
 
-新しいVSCodeのWindowsが起動します。
+新しいVSCodeのウィンドウが起動します。
 SSH接続のパスワードを求められるので、マニフェストで設定した値`devpass`を入力します。
 
 下記のようにVSCodeからPod環境にアクセスができます。
 
 ![dev-pod-ssh.png](./dev-pod-ssh.png)
 
-## - VSCode Kubernetes + DevContainer 拡張で接続する
+## VSCode Kubernetes + DevContainer 拡張で接続する
 
 Pod上でVSCodeサーバーを起動し、VSCodeから接続します。
 VSCodeサーバーのPodへのインストールは、拡張機能が自動で行います。
@@ -154,8 +154,8 @@ spec:
 このマニフェストをK8sにデプロイします。
 
 ```bash
-% kubectl apply -f ./dev-pod-k8s.yaml 
-pod/ai-dev-pod created
+% kubectl apply -f ./dev-pod-k8s.yaml
+pod/dev-pod-k8s created
 dev-pod % kubectl get pods
 NAME                                READY   STATUS    RESTARTS       AGE
 dev-pod-k8s                          1/1     Running   0              5s
