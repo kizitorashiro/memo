@@ -1,0 +1,23 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: dev-pod-k8s-job
+spec:
+  backoffLimit: 0
+  template:
+    metadata:
+      labels:
+        app: dev-pod-job
+    spec:
+      restartPolicy: Never
+      containers:
+      - name: dev
+        image: python:3.11
+        command: ["sleep", "infinity"]
+        workingDir: /workspace
+        volumeMounts:
+        - name: workspace
+          mountPath: /workspace
+      volumes:
+      - name: workspace
+        emptyDir: {}
